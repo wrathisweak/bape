@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bape Reselling Supply Co.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 50px; /* Adjust the size of your logo image */
+            height: auto;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 5px; /* Space between image and text */
+        }
+
+        nav a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        main {
+            margin-top: 100px;
+            padding: 20px;
+            min-height: calc(100vh - 200px);
+        }
+
+        .shirt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .shirt-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .shirt-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .shirt-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        aside {
+            position: fixed;
+            right: -300px;
+            top: 100px;
+            width: 280px;
+            background: white;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            border-radius: 5px 0 0 5px;
+        }
+
+        aside.active {
+            right: 0;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .product-info h2 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 15px 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Logo container with image and text -->
+        <div class="logo-container">
+            <img src="logo.jpg" alt="UrbanThread Logo" class="logo-img">
+            <div class="logo-text">Bape Reselling Supply Co.</div>
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="shirt-grid">
+            <div class="shirt-card" onclick="showDetails('MR. BATHING APE tee', 260, 'MR. BATHING APE Men Short Sleeve T-Shirt')">
+                <img src="1.jpg" alt="New T-Shirt Design">
+                <h3>T-Shirt</h3>
+                <p>New Arrival</p>
+            </div>
+
+            <div class="shirt-card" onclick="showDetails('A BATHING APE tee', 98, 'Camo Big Ape-print T-shirt')">
+                <img src="2.jpg" alt="Another Design">
+                <h3>T-Shirt</h3>
+                <p>New Arrival</p>
+            </div>
+
+            <div class="shirt-card" onclick="showDetails('Bape Grafitti Tee', 120, 'BAPE Grafitti check milo on big ape tee black')">
+                <img src="3.jpg" alt="Third Design">
+                <h3>T-Shirt</h3>
+                <p>New Arrival</p>
+            </div>
+            
+            <div class="shirt-card" onclick="showDetails('Bape bathing ape zip up hoodie', 490, 'New Bape Bathing ape Jacket SHARK Head Camo FULL ZIP HOODIE Long Sleeve Clothes')">
+                <img src="4.jpg" alt="Third Design">
+                <h3>Hoodie</h3>
+                <p>Limited Edition</p>
+            </div>
+            
+            <div class="shirt-card" onclick="showDetails('Bape Shark Sweater', 300, ' A Bathing Ape X BAPE Shark Sweater In Black')">
+                <img src="5.jpg" alt="Third Design">
+                <h3>Sweater</h3>
+                <p>Special Edition</p>
+            </div>
+            
+        </div>
+
+        <aside id="productDetails">
+            <span class="close-btn" onclick="hideDetails()">×</span>
+            <div class="product-info">
+                <h2 id="shirtName"></h2>
+                <div class="price">$<span id="shirtPrice"></span></div>
+                <p id="shirtDescription"></p>
+                <button style="margin-top: 20px; padding: 10px 20px; background-color: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">Buy Now</button>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <p>Contact us: dhandevera@gmail.com | 0912345678910</p>
+        <p>Established 2008</p>
+    </footer>
+
+    <script>
+        function showDetails(name, price, description) {
+            document.getElementById('shirtName').textContent = name;
+            document.getElementById('shirtPrice').textContent = price;
+            document.getElementById('shirtDescription').textContent = description;
+            document.getElementById('productDetails').classList.add('active');
+        }
+
+        function hideDetails() {
+            document.getElementById('productDetails').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
